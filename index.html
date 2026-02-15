@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Jurnal Guru</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse-ring {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.3); opacity: 0; }
+    }
+    
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .fade-in-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-in-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-in-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .fade-in-up-delay-4 { animation-delay: 0.4s; opacity: 0; }
+    
+    .login-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+    
+    .teacher-chip {
+      transition: all 0.3s ease;
+    }
+    
+    .teacher-chip:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full m-0 overflow-auto">
+  <div id="app-wrapper" class="w-full min-h-full" style="background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3d7ab5 100%);"><!-- Decorative Elements -->
+   <div class="absolute top-10 left-10 w-20 h-20 rounded-full opacity-10" style="background-color: #ffffff;"></div>
+   <div class="absolute top-32 right-20 w-14 h-14 rounded-full opacity-10" style="background-color: #ffffff;"></div>
+   <div class="absolute bottom-20 left-20 w-24 h-24 rounded-full opacity-10" style="background-color: #ffffff;"></div>
+   <div class="relative z-10 flex items-center justify-center min-h-full p-6">
+    <div class="w-full max-w-md"><!-- Logo/Icon -->
+     <div class="text-center mb-8 fade-in-up fade-in-up-delay-1">
+      <div class="inline-flex items-center justify-center w-24 h-24 rounded-full mb-4 float-animation" style="background: linear-gradient(135deg, #4a90c2 0%, #6bb3d9 100%); box-shadow: 0 10px 40px rgba(74, 144, 194, 0.4);">
+       <svg class="w-12 h-12" fill="#ffffff" viewbox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
+       </svg>
+      </div>
+      <h1 id="page-title" class="text-3xl font-bold mb-2" style="color: #ffffff;">Login Jurnal Guru</h1>
+      <p id="welcome-text" class="text-lg opacity-90" style="color: #a8d4f0;">Selamat Datang</p>
+     </div><!-- Login Card -->
+     <div class="rounded-2xl p-8 fade-in-up fade-in-up-delay-2" style="background-color: #ffffff; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);">
+      <p id="instruction-text" class="text-center mb-6" style="color: #5a7a9a;">Masukkan nama Anda untuk mengakses jurnal</p>
+      <form id="login-form" class="space-y-5">
+       <div><label for="teacher-name" class="block text-sm font-medium mb-2" style="color: #2d5a87;"> Nama Guru </label>
+        <div class="relative"><span class="absolute left-4 top-1/2 transform -translate-y-1/2">
+          <svg class="w-5 h-5" fill="#5a7a9a" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          </svg></span> <input type="text" id="teacher-name" name="teacher-name" placeholder="Ketik nama Anda..." autocomplete="off" class="w-full pl-12 pr-4 py-4 rounded-xl border-2 text-lg transition-all duration-300 focus:outline-none" style="border-color: #d1e3f0; background-color: #f8fbfd; color: #1e3a5f;" onfocus="this.style.borderColor='#4a90c2'; this.style.boxShadow='0 0 0 4px rgba(74, 144, 194, 0.1)';" onblur="this.style.borderColor='#d1e3f0'; this.style.boxShadow='none';">
+        </div>
+       </div><!-- Error Message -->
+       <div id="error-message" class="hidden rounded-xl p-4" style="background-color: #fef2f2;">
+        <div class="flex items-center gap-3">
+         <svg class="w-5 h-5 flex-shrink-0" fill="#dc2626" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+         </svg><span id="error-text" class="text-sm font-medium" style="color: #dc2626;"></span>
+        </div>
+       </div><!-- Success Message -->
+       <div id="success-message" class="hidden rounded-xl p-4" style="background-color: #f0fdf4;">
+        <div class="flex items-center gap-3">
+         <svg class="w-5 h-5 flex-shrink-0" fill="#16a34a" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+         </svg><span class="text-sm font-medium" style="color: #16a34a;">Login berhasil! Mengalihkan ke jurnal...</span>
+        </div>
+       </div><!-- Submit Button --> <button type="submit" id="login-btn" class="login-btn relative w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:transform hover:scale-[1.02]" style="background: linear-gradient(135deg, #4a90c2 0%, #2d5a87 100%); color: #ffffff; box-shadow: 0 4px 15px rgba(45, 90, 135, 0.4);"> <span class="flex items-center justify-center gap-2">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M10 17l5-5-5-5v10z" />
+         </svg> Masuk ke Jurnal </span> </button>
+      </form><!-- Teacher List Hint -->
+      <div class="mt-6 pt-6 border-t fade-in-up fade-in-up-delay-3" style="border-color: #e8f1f8;">
+       <p class="text-xs text-center mb-3" style="color: #8ba4bc;">Guru Terdaftar:</p>
+       <div class="flex flex-wrap justify-center gap-2"><span class="teacher-chip px-3 py-1 rounded-full text-xs font-medium cursor-pointer" style="background-color: #e8f4fc; color: #2d5a87;" onclick="fillName('Efendi')">Efendi</span> <span class="teacher-chip px-3 py-1 rounded-full text-xs font-medium cursor-pointer" style="background-color: #e8f4fc; color: #2d5a87;" onclick="fillName('Ismail')">Ismail</span> <span class="teacher-chip px-3 py-1 rounded-full text-xs font-medium cursor-pointer" style="background-color: #e8f4fc; color: #2d5a87;" onclick="fillName('Quryadi')">Quryadi</span> <span class="teacher-chip px-3 py-1 rounded-full text-xs font-medium cursor-pointer" style="background-color: #e8f4fc; color: #2d5a87;" onclick="fillName('Qibtiyah')">Qibtiyah</span>
+       </div>
+      </div>
+     </div><!-- Footer -->
+     <p class="text-center mt-6 text-sm opacity-70 fade-in-up fade-in-up-delay-4" style="color: #a8d4f0;">© 2024 Sistem Jurnal Guru</p>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Valid teacher names (case-insensitive)
+    const validTeachers = ['efendi', 'ismail', 'quryadi', 'qibtiyah'];
+    const journalUrl = 'https://docs.google.com/forms/d/1yd27iEl4X4KHUpNyKyWwCg58Ewn2SdKeAakRqbdngUo/edit';
+    
+    // Default configuration
+    const defaultConfig = {
+      page_title: 'Login Jurnal Guru',
+      welcome_text: 'Selamat Datang',
+      instruction_text: 'Masukkan nama Anda untuk mengakses jurnal',
+      background_color: '#1e3a5f',
+      card_color: '#ffffff',
+      text_color: '#2d5a87',
+      primary_action_color: '#4a90c2',
+      secondary_action_color: '#5a7a9a',
+      font_family: 'Poppins',
+      font_size: 16
+    };
+    
+    // Fill name when clicking teacher chip
+    function fillName(name) {
+      document.getElementById('teacher-name').value = name;
+      hideMessages();
+    }
+    
+    // Hide error and success messages
+    function hideMessages() {
+      document.getElementById('error-message').classList.add('hidden');
+      document.getElementById('success-message').classList.add('hidden');
+    }
+    
+    // Show error message
+    function showError(message) {
+      const errorEl = document.getElementById('error-message');
+      const errorText = document.getElementById('error-text');
+      errorText.textContent = message;
+      errorEl.classList.remove('hidden');
+      document.getElementById('success-message').classList.add('hidden');
+    }
+    
+    // Show success message
+    function showSuccess() {
+      document.getElementById('success-message').classList.remove('hidden');
+      document.getElementById('error-message').classList.add('hidden');
+    }
+    
+    // Handle form submission
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const nameInput = document.getElementById('teacher-name');
+      const name = nameInput.value.trim().toLowerCase();
+      
+      if (!name) {
+        showError('Silakan masukkan nama Anda');
+        return;
+      }
+      
+      if (validTeachers.includes(name)) {
+        showSuccess();
+        
+        // Redirect to journal after short delay
+        setTimeout(() => {
+          window.open(journalUrl, '_blank', 'noopener,noreferrer');
+        }, 1500);
+      } else {
+        showError('Nama tidak terdaftar. Silakan periksa kembali.');
+        nameInput.focus();
+      }
+    });
+    
+    // Element SDK integration
+    async function onConfigChange(config) {
+      const pageTitle = document.getElementById('page-title');
+      const welcomeText = document.getElementById('welcome-text');
+      const instructionText = document.getElementById('instruction-text');
+      
+      if (pageTitle) pageTitle.textContent = config.page_title || defaultConfig.page_title;
+      if (welcomeText) welcomeText.textContent = config.welcome_text || defaultConfig.welcome_text;
+      if (instructionText) instructionText.textContent = config.instruction_text || defaultConfig.instruction_text;
+      
+      // Apply font
+      const customFont = config.font_family || defaultConfig.font_family;
+      document.body.style.fontFamily = `${customFont}, Poppins, sans-serif`;
+      
+      // Apply font size scaling
+      const baseSize = config.font_size || defaultConfig.font_size;
+      if (pageTitle) pageTitle.style.fontSize = `${baseSize * 1.875}px`;
+      if (welcomeText) welcomeText.style.fontSize = `${baseSize * 1.125}px`;
+      if (instructionText) instructionText.style.fontSize = `${baseSize}px`;
+    }
+    
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.card_color || defaultConfig.card_color,
+            set: (value) => {
+              config.card_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ card_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ primary_action_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (value) => {
+              config.secondary_action_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ secondary_action_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+    
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['page_title', config.page_title || defaultConfig.page_title],
+        ['welcome_text', config.welcome_text || defaultConfig.welcome_text],
+        ['instruction_text', config.instruction_text || defaultConfig.instruction_text]
+      ]);
+    }
+    
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ce2747d8378ea86',t:'MTc3MTEzMzg2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
